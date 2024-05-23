@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery</title>
+<style>
+  /* Estilos básicos */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .main-image-container {
+    position: relative; /* Añadido */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .main-image {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+
+  .see-more-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .see-more-button:hover {
+    background-color: #0056b3;
+  }
+
+  .arrow {
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .arrow.left {
+    left: 10px;
+  }
+
+  .arrow.right {
+    right: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Galeria</h1>
+  <div class="main-image-container">
+    <h2 id="image-title">Image Title</h2>
+    <img src="https://via.placeholder.com/300" alt="Image 1" class="main-image">
+    <button class="arrow left">&#10094;</button>
+    <button class="arrow right">&#10095;</button>
+    <button class="see-more-button">Ver Más</button>
+    <p id="image-description" style="display: none;">Descripción de la imagen</p>
+  </div>
+</div>
+
+<script>
+  const mainImage = document.querySelector('.main-image');
+  const imageTitle = document.getElementById('image-title');
+  const imageDescription = document.getElementById('image-description');
+  const seeMoreButton = document.querySelector('.see-more-button');
+  const leftArrow = document.querySelector('.arrow.left');
+  const rightArrow = document.querySelector('.arrow.right');
+
+  const images = [
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 1', description: 'Descripción de la imagen 1' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 2', description: 'Descripción de la imagen 2' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 3', description: 'Descripción de la imagen 3' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 4', description: 'Descripción de la imagen 4' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 5', description: 'Descripción de la imagen 5' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 6', description: 'Descripción de la imagen 6' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 7', description: 'Descripción de la imagen 7' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 8', description: 'Descripción de la imagen 8' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 9', description: 'Descripción de la imagen 9' },
+    { src: 'https://via.placeholder.com/300', alt: 'Imagen 10', description: 'Descripción de la imagen 10' }
+  ];
+
+  let currentIndex = 0;
+
+  function showImage(index) {
+    mainImage.src = images[index].src;
+    mainImage.alt = images[index].alt;
+    imageTitle.textContent = images[index].alt;
+    imageDescription.textContent = images[index].description;
+    currentIndex = index;
+  }
+
+  showImage(currentIndex);
+
+  seeMoreButton.addEventListener('click', () => {
+    // Toggle para mostrar o ocultar la descripción
+    imageDescription.style.display = imageDescription.style.display === 'none' ? 'block' : 'none';
+  });
+
+  leftArrow.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(currentIndex);
+  });
+
+  rightArrow.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+  });
+</script>
+
+</body>
+</html>
